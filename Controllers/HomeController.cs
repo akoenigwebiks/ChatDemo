@@ -7,6 +7,8 @@ using System.Diagnostics;
 
 namespace ChatDemo.Controllers
 {
+    public record Threat();
+    public record CounterMeasureResponse();
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -34,6 +36,20 @@ namespace ChatDemo.Controllers
         {
             await _hubContext.Clients.All.SendAsync("FE_sendNumber", num);
             return Ok();
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> CreateThreat(Threat threat)
+        {
+            await _hubContext.Clients.All.SendAsync("NotifyIronDomeOfThreat", threat);
+            return Ok();
+        }
+
+        [HttpGet]
+        public Task CreateResponse(CounterMeasureResponse counterMeasureResponse)
+        {
+            // PROTECT ZION!!!
+            return null!;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
