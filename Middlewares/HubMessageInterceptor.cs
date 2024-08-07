@@ -21,8 +21,8 @@ namespace ChatDemo.Middlewares
             // Log the message
             Debug.WriteLine($"Sending message from {user}: {message}");
 
-            // Optionally modify the message
-            var modifiedMessage = $"[Modified] {user}: {message}";
+            //// Optionally modify the message
+            //var modifiedMessage = $"[Modified] {user}: {message}";
 
             // Send the message using SignalR
             await _hubContext.Clients.All.SendAsync(methodName, new ChatMessage(user,message));

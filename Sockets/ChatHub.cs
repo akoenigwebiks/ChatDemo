@@ -15,7 +15,9 @@ namespace ChatDemo.Sockets
         public async Task SendMessage(string user, string message)
         {
             // Use the interceptor to send the message
-            await _interceptor.SendMessageAsync("ReceiveMessage",user ,message);
+            await Clients.All.SendAsync("ReceiveMessage", new ChatMessage(user, message));
+
+            //await _interceptor.SendMessageAsync("ReceiveMessage",user ,message);
         }
     }
 }

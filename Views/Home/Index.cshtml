@@ -39,12 +39,21 @@
             .build();
 
         connection.on("ReceiveMessage", function (event) {
-            debugger;
             const msg = document.createElement("li");
             msg.classList.add("mb-2");
             msg.textContent = `${event.user}: ${event.message}`;
             document.getElementById("messagesList").appendChild(msg);
             // Scroll to bottom when new message is added
+            var messageList = document.getElementById("messagesList");
+            messageList.scrollTop = messageList.scrollHeight;
+        });
+
+        connection.on("FE_sendNumber", function (num) {
+            const numberElement = document.createElement("li");
+            numberElement.classList.add("mb-2");
+            numberElement.textContent = `Received number: ${num}`;
+            document.getElementById("messagesList").appendChild(numberElement);
+            // Scroll to bottom when new number is added
             var messageList = document.getElementById("messagesList");
             messageList.scrollTop = messageList.scrollHeight;
         });
